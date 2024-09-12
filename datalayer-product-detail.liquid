@@ -1,18 +1,17 @@
 <script>
-  // Ensure dataLayer exists
   window.dataLayer = window.dataLayer || [];
 
-  // Ensure product object exists before pushing to dataLayer
   {% if product %}
   window.dataLayer.push({
     'event': 'view_item',
     'ecommerce': {
       'items': [{
         'item_id': '{{ product.id }}',
-        'item_name': '{{ product.title | escape }}',  // Escaping special characters in product name
-        'price': '{{ product.price | money_without_currency | replace: ',', '' }}',  // Removing commas from price
-        'category': '{{ product.type | escape }}',  // Escaping special characters in category/type
-        'quantity': 1
+        'item_name': '{{ product.title | escape }}',
+        'price': '{{ product.price | money_without_currency | replace: ',', '' }}',
+        'category': '{{ product.type | escape }}',
+        'quantity': 1,
+        'value': '{{ product.price | money_without_currency | replace: ',', '' }}'  // Optional: Add this line to track value
       }]
     }
   });
