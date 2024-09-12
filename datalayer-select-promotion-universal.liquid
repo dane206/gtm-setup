@@ -1,12 +1,12 @@
 <script>
   document.addEventListener('click', function(event) {
-    var target = event.target.closest('.promotion-link'); // Adjust selector based on your theme
+    var target = event.target.closest('.promotion-banner'); // Adjust this selector if your promotion elements have a different class
     if (target) {
-      var promotionId = target.getAttribute('data-promotion-id');  // Ensure your promotion elements contain promotion data
-      var promotionName = target.getAttribute('data-promotion-name');
-      var creativeName = target.getAttribute('data-creative-name');
-      var position = target.getAttribute('data-position');
-      
+      var promotionId = target.id || 'generic_promo';  // Use the element ID or a generic ID
+      var promotionName = target.getAttribute('data-promotion-name') || 'Generic Promotion';
+      var creativeName = target.getAttribute('data-creative-name') || 'Generic Creative';
+      var position = target.getAttribute('data-position') || 'Unknown Position';
+
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         'event': 'select_promotion',
