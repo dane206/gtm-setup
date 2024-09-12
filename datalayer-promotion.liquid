@@ -4,17 +4,30 @@
   // Only push promotion data if UTM parameters are present
   var urlParams = new URLSearchParams(window.location.search);
   if (urlParams.has('utm_campaign') && urlParams.has('utm_source') && urlParams.has('utm_medium')) {
-    window.dataLayer.push({
+    var promotionObject = {
       'event': 'view_promotion',
       'ecommerce': {
         'promotions': [{
-          'promotion_id': urlParams.get('utm_campaign'),  // Using the UTM campaign as the promotion ID
-          'promotion_name': urlParams.get('utm_campaign'),  // Using UTM campaign as the promotion name
-          'creative_name': urlParams.get('utm_source'),  // Using UTM source to track the source of the promotion
-          'position': 'email_campaign'  // Hardcoded to represent that the promotion is from an email
+          'promotion_id': urlParams.get('utm_campaign'),  // UTM campaign as the promotion ID
+          'promotion_name': urlParams.get('utm_campaign'),  // Using UTM campaign as promotion name
+          'creative_name': urlParams.get('utm_source'),  // UTM source, e.g., 'klaviyo'
+          'position': urlParams.get('utm_medium')  // Using UTM medium as position, e.g., 'email_campaign'
         }]
       }
-    });
+    };
+
+    // Add utm_content if available
+    if (urlParams.has('utm_content')) {
+      promotionObject.ecommerce.promotions[0].content = urlParams.get('utm_content');  // Adding utm_content if it exists
+    }
+
+    // Add utm_term if available
+    if (urlParams.has('utm_term')) {
+      promotionObject.ecommerce.promotions[0].keyword = urlParams.get('utm_term');  // Adding utm_term if it exists
+    }
+
+    // Push the promotion object to the dataLayer
+    window.dataLayer.push(promotionObject);
   }
 </script>
 
