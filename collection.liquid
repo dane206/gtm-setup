@@ -1,2 +1,16 @@
 {% include 'datalayer-product-list' %}
 {% render 'datalayer-select-item' %}
+
+{% for product in collection.products %}
+  <!-- Product card structure starts -->
+  <div class="product-card" 
+     data-product-id="{{ product.id }}" 
+     data-product-title="{{ product.title | escape }}" 
+     data-product-price="{{ product.price | money_without_currency }}" 
+     data-product-category="{{ product.type }}">
+    
+    <!-- Your existing product card code goes here (image, title, price, etc.) -->
+
+  </div>
+  <!-- Product card structure ends -->
+{% endfor %}
