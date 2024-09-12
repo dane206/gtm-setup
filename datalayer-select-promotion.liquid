@@ -1,0 +1,27 @@
+<script>
+  document.addEventListener('click', function(event) {
+    var target = event.target.closest('.promotion-link'); // Adjust selector based on your theme
+    if (target) {
+      var promotionId = target.getAttribute('data-promotion-id');  // Ensure your promotion elements contain promotion data
+      var promotionName = target.getAttribute('data-promotion-name');
+      var creativeName = target.getAttribute('data-creative-name');
+      var position = target.getAttribute('data-position');
+      
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'select_promotion',
+        'ecommerce': {
+          'promotions': [{
+            'promotion_id': promotionId,
+            'promotion_name': promotionName,
+            'creative_name': creativeName,
+            'position': position
+          }]
+        }
+      });
+    }
+  });
+</script>
+
+// load in 'index.liquid'
+// {% render 'datalayer-select-promotion' %}
