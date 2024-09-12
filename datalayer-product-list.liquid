@@ -1,0 +1,25 @@
+<script>
+  // Ensure dataLayer exists
+  window.dataLayer = window.dataLayer || [];
+
+  // Ensure collection and products exist before pushing to the dataLayer
+  {% if collection and collection.products.size > 0 %}
+  window.dataLayer.push({
+    'event': 'view_item_list',
+    'item_list_name': '{{ collection.title | escape }}', // Escaping special characters
+    'items': [
+      {% for product in collection.products %}
+      {
+        'item_id': '{{ product.id }}',
+        'item_name': '{{ product.title | escape }}', // Escaping product title
+        'price': '{{ product.price | money_without_currency | replace: ',', '' }}', // Removing commas from price
+        'category': '{{ product.type | escape }}' // Escaping category/type
+      }{% if forloop.last == false %},{% endif %}
+      {% endfor %}
+    ]
+  });
+  {% endif %}
+</script>
+
+// include in collection.liquid
+// {% include 'datalayer-product-list' %}
