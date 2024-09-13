@@ -2,10 +2,11 @@
   document.addEventListener('click', function(event) {
     var target = event.target.closest('.product-card'); // Adjust selector based on your theme
     if (target) {
-      var productId = target.getAttribute('data-product-id');  // Ensure your product elements contain product data
+      var productId = target.getAttribute('data-product-id');  
       var productTitle = target.getAttribute('data-product-title');
       var productPrice = target.getAttribute('data-product-price');
       var productCategory = target.getAttribute('data-product-category');
+      var productVariant = target.getAttribute('data-product-variant'); // Optional
 
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
@@ -15,7 +16,8 @@
             'item_id': productId,
             'item_name': productTitle,
             'price': productPrice,
-            'item_category': productCategory
+            'item_category': productCategory,
+            'variant': productVariant || ''
           }]
         }
       });
