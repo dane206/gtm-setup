@@ -1,14 +1,15 @@
 {% render 'datalayer-select-promotion-universal' %}
+
+<!-- Dynamic Promotion Link -->
 <a href="{{ promotion.url }}" class="promotion-link" 
    data-promotion-id="promo_001" 
    data-promotion-name="Summer Sale" 
    data-creative-name="Homepage Banner" 
    data-position="header_banner">
-   <!-- Banner Image or Text -->
    <img src="{{ promotion.banner_image }}" alt="Summer Sale">
 </a>
 
-// homepage promotion
+<!-- Static Homepage Promotion Banner -->
 <div class="promotion-banner" id="promo_homepage_banner">
   <img src="path_to_banner_image" alt="Shop Our Homepage Sale">
   <a href="/collections/winter-sale">Shop Now</a>
