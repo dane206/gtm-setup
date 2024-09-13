@@ -2,14 +2,17 @@
 {% render 'datalayer-promotion' %}
 {% render 'datalayer-select-promotion-universal' %}
 
-<!-- Product page: View product details and add to cart -->
+<!-- Product page: View product details and select item -->
 {% if template == 'product' %}
   {% render 'datalayer-product-detail' %}
+  {% render 'datalayer-select-item' %}
+
 {% endif %}
 
-<!-- Collection page: View product list -->
+<!-- Collection page: View product list and select item -->
 {% if template == 'collection' %}
   {% render 'datalayer-product-list' %}
+  {% render 'datalayer-select-item' %}
 {% endif %}
 
 <!-- Cart page: View cart and checkout initiation -->
