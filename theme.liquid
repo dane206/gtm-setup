@@ -1,19 +1,30 @@
+<!-- Global promotion data -->
 {% render 'datalayer-promotion' %}
 {% render 'datalayer-select-promotion-universal' %}
 
+<!-- Product page: View product details and add to cart -->
 {% if template == 'product' %}
   {% render 'datalayer-product-detail' %}
   {% render 'datalayer-add-to-cart' %}
 {% endif %}
 
+<!-- Collection page: View product list -->
 {% if template == 'collection' %}
   {% render 'datalayer-product-list' %}
 {% endif %}
 
+<!-- Cart page: View cart and checkout initiation -->
 {% if template == 'cart' %}
+  {% render 'datalayer-view-cart' %}
   {% render 'datalayer-checkout' %}
 {% endif %}
 
+<!-- Checkout and thank you page: Purchase event -->
 {% if template == 'checkout' %}
   {% render 'datalayer-purchase' %}
+{% endif %}
+
+<!-- Search results page: Search event -->
+{% if template == 'search' %}
+  {% render 'datalayer-search' %}
 {% endif %}
