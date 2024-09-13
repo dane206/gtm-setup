@@ -3,6 +3,6 @@
   window.dataLayer.push({
     'event': 'search',
     'search_term': '{{ search.terms | escape }}',
-    'results_count': {{ search.results_count }}
+    'results_count': '{{ search.results_count }}'
   });
 </script>
