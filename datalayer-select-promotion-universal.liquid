@@ -1,21 +1,32 @@
 <script>
   document.addEventListener('click', function(event) {
-    var target = event.target.closest('.promotion-banner'); // Adjust this selector if your promotion elements have a different class
+    var target = event.target.closest('.promotion-banner'); // Adjust selector if promotion elements have a different class
     if (target) {
+      var creativeName = target.getAttribute('data-creative-name') || 'Generic Creative';
+      var creativeSlot = target.getAttribute('data-creative-slot') || 'Unknown Position';
       var promotionId = target.id || 'generic_promo';  // Use the element ID or a generic ID
       var promotionName = target.getAttribute('data-promotion-name') || 'Generic Promotion';
-      var creativeName = target.getAttribute('data-creative-name') || 'Generic Creative';
-      var position = target.getAttribute('data-position') || 'Unknown Position';
+      var productId = target.getAttribute('data-product-id');  
+      var productTitle = target.getAttribute('data-product-title');
+      var productCategory = target.getAttribute('data-product-category');
+      var productPrice = target.getAttribute('data-product-price');
+      var productVariant = target.getAttribute('data-product-variant'); // Optional
 
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         'event': 'select_promotion',
         'ecommerce': {
-          'promotions': [{
-            'promotion_id': promotionId,
-            'promotion_name': promotionName,
-            'creative_name': creativeName,
-            'position': position
+          'creative_name': urlParams.get('utm_source') || creativeName,
+          'creative_slot': urlParams.get('utm_medium') || , creativeSlot,
+          'promotion_id': urlParams.get('utm_campaign') || promotionId,
+          'promotion_name': urlParams.get('utm_campaign') || promotionName,
+          'items': [{
+            'item_id': productId,
+            'item_name': productTitle,
+            'item_category': productCategory,
+            'price': productPrice,
+            'quantity': 1,
+            'variant': productVariant || ''
           }]
         }
       });
