@@ -1,1 +1,19 @@
 {% render 'datalayer-promotion' %}
+{% render 'datalayer-select-promotion-universal' %}
+
+{% if template == 'product' %}
+  {% render 'datalayer-product-detail' %}
+  {% render 'datalayer-add-to-cart' %}
+{% endif %}
+
+{% if template == 'collection' %}
+  {% render 'datalayer-product-list' %}
+{% endif %}
+
+{% if template == 'cart' %}
+  {% render 'datalayer-checkout' %}
+{% endif %}
+
+{% if template == 'checkout' %}
+  {% render 'datalayer-purchase' %}
+{% endif %}
