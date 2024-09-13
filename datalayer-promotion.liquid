@@ -7,23 +7,28 @@
     var promotionObject = {
       'event': 'view_promotion',
       'ecommerce': {
-        'promotions': [{
-          'promotion_id': urlParams.get('utm_campaign'),  // UTM campaign as the promotion ID
-          'promotion_name': urlParams.get('utm_campaign'),  // Using UTM campaign as promotion name
-          'creative_name': urlParams.get('utm_source'),  // UTM source, e.g., 'klaviyo'
-          'position': urlParams.get('utm_medium')  // Using UTM medium as position, e.g., 'email_campaign'
+        'creative_name': urlParams.get('utm_source'),
+        'creative_slot': urlParams.get('utm_medium'),
+        'promotion_id': urlParams.get('utm_campaign'),
+        'promotion_name': urlParams.get('utm_campaign'),
+        'items': [{
+          'item_id': '{{ product.id }}',
+          'item_name': '{{ product.title | escape }}',
+          'item_category': '{{ product.type | escape }}',
+          'price': '{{ product.price | money_without_currency | replace: ',', '' }}',
+          'quantity': 1
         }]
       }
     };
 
     // Add utm_content if available
     if (urlParams.has('utm_content')) {
-      promotionObject.ecommerce.promotions[0].content = urlParams.get('utm_content');  // Adding utm_content if it exists
+      promotionObject.ecommerce.items[0].content = urlParams.get('utm_content');
     }
 
     // Add utm_term if available
     if (urlParams.has('utm_term')) {
-      promotionObject.ecommerce.promotions[0].keyword = urlParams.get('utm_term');  // Adding utm_term if it exists
+      promotionObject.ecommerce.items[0].keyword = urlParams.get('utm_term');
     }
 
     // Push the promotion object to the dataLayer
