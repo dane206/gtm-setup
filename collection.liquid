@@ -1,6 +1,7 @@
 {% include 'datalayer-product-list' %}
 {% render 'datalayer-select-item' %}
 
+<!-- Loop through products in the collection -->
 {% for product in collection.products %}
   <!-- Product card structure starts -->
   <div class="product-card" 
@@ -15,7 +16,7 @@
   <!-- Product card structure ends -->
 {% endfor %}
 
-// collection promotion
+<!-- Collection promotion banner -->
 <div class="promotion-banner" id="promo_collection_banner">
   <p>Don't miss our collection-wide sale!</p>
   <a href="/collections/all">View All Products</a>
