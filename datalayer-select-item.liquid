@@ -1,22 +1,25 @@
 <script>
   document.addEventListener('click', function(event) {
-    var target = event.target.closest('.product-card'); // Adjust selector based on your theme
+    var target = event.target.closest('.product-card'); // Adjust selector based on theme
     if (target) {
       var productId = target.getAttribute('data-product-id');  
       var productTitle = target.getAttribute('data-product-title');
-      var productPrice = target.getAttribute('data-product-price');
       var productCategory = target.getAttribute('data-product-category');
+      var productPrice = target.getAttribute('data-product-price');
       var productVariant = target.getAttribute('data-product-variant'); // Optional
 
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         'event': 'select_item',
         'ecommerce': {
+          'item_list_id': '{{ collection.title | escape }}',
+          'item_list_name': '{{ collection.title | escape }}',
           'items': [{
             'item_id': productId,
             'item_name': productTitle,
-            'price': productPrice,
             'item_category': productCategory,
+            'price': productPrice,
+            'quantity': 1,
             'variant': productVariant || ''
           }]
         }
