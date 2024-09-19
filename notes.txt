@@ -1,0 +1,64 @@
+// notes
+Available Data Layer Variables
+
+Event Name:
+Variable Name: event
+DLV Path: event
+
+Product ID (Array):
+Variable Name: DLV - Product ID (Array)
+DLV Path: eventModel.ecomm_prodid
+
+Page Type:
+Variable Name: DLV - Page Type
+DLV Path: eventModel.ecomm_pagetype
+
+Total Value:
+Variable Name: DLV - Total Value
+DLV Path: eventModel.ecomm_totalvalue
+
+Product Name:
+Variable Name: DLV - Product Name
+DLV Path: eventModel.items.0.name
+
+Brand:
+Variable Name: DLV - Brand
+DLV Path: eventModel.items.0.brand
+
+Category:
+Variable Name: DLV - Category
+DLV Path: eventModel.items.0.category
+
+Price:
+Variable Name: DLV - Price
+DLV Path: eventModel.items.0.price
+Variant:
+
+Variable Name: DLV - Variant
+DLV Path: eventModel.items.0.variant
+Unique Event ID:
+
+Variable Name: DLV - Unique Event ID
+DLV Path: gtm.uniqueEventId
+
+How to Mutate ecomm_totalvalue to Be the Price of the Product
+To mutate the ecomm_totalvalue field and set it to the product's price, you can use a Custom JavaScript Variable in GTM. Here’s how you can set this up:
+
+Create a Custom JavaScript Variable:
+Go to Variables in GTM.
+Click New under the User-Defined Variables section.
+Name it JS - Mutated Total Value.
+Set Variable Type: Choose Custom JavaScript as the variable type.
+Add the Following Code:
+
+function() {
+  var eventModel = {{DLV - Event Model}}; // Create a DLV for eventModel: eventModel
+  var price = parseFloat(eventModel.items[0].price); // Access the price from the first item
+  
+  // Set ecomm_totalvalue to the price if it's null or undefined
+  if (!eventModel.ecomm_totalvalue) {
+    eventModel.ecomm_totalvalue = price;
+  }
+  
+  return eventModel.ecomm_totalvalue;
+}
