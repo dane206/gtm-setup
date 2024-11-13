@@ -59,6 +59,155 @@ function() {
   if (!eventModel.ecomm_totalvalue) {
     eventModel.ecomm_totalvalue = price;
   }
+//edit: Sunday, 10-20-24
+
+//This will set the pageType to "home" manually
+window.dataLayer.push({
+    pageType: "home"
+});
+
+//This will set the pageType to "home" via Shopify viariable "__st.p"
+window.dataLayer.push({
+    pageType: __st.p
+});
+
+//This will set the pageType to "home"
+window.dataLayer.push({
+    pageType: meta.page.pageType
+});
+
+//This will set the pageType to "collection"
+window.dataLayer.push({
+    pageType: meta.page.pageType
+});
+
+//This will set the pageType to "product"
+window.dataLayer.push({
+    pageType: meta.page.pageType
+});
+
+//This will set the pageType to "searchresults"
+window.dataLayer.push({
+    pageType: meta.page.pageType
+});
+
+//This will get values on "checkout"
+window.dataLayer.push({
+    pageType: trekkie.trekkie.defaultAttributes.appName,
+    checkoutToken: trekkie.trekkie.defaultAttributes.checkoutToken,
+    language: trekkie.trekkie.defaultAttributes.contentLanguage,
+    currency: trekkie.trekkie.defaultAttributes.currency,
+    visitToken: trekkie.trekkie.defaultAttributes.visitToken,
+    microSessionCount: trekkie.trekkie.defaultAttributes.microSessionCount,
+    microSessionId: trekkie.trekkie.defaultAttributes.microSessionId,
+    shopId: trekkie.trekkie.defaultAttributes.shopId,
+    themeCityHash: trekkie.trekkie.defaultAttributes.themeCityHash,
+    themeId: trekkie.trekkie.defaultAttributes.themeId,
+    uniqToken: trekkie.trekkie.defaultAttributes.uniqToken,
+    visitToken: trekkie.trekkie.defaultAttributes.visitToken
+});
+
+window.dataLayer.push({
+  'event': 'begin_checkout',
+  'currency': 'USD',        // Required parameter: Currency code
+  'value': 50.00,           // Recommended: Total value of the cart
+  'items': [{
+      'item_name': 'Liposomal Curcumin',
+      'item_id': '43010795012287',
+      'price': 25.00,
+      'quantity': 2
+  }],
+  'checkout_step': 1        // Custom parameter for tracking the checkout step
+});
+
+window.dataLayer.push({
+  'event': 'add_shipping_info',
+  'currency': 'USD',        // Required parameter: Currency code
+  'value': 50.00,           // Recommended: Total value of the cart
+  'shipping_tier': 'Standard', // Optional but useful: Shipping method
+  'items': [{
+      'item_name': 'Liposomal Curcumin',
+      'item_id': '43010795012287',
+      'price': 25.00,
+      'quantity': 2
+  }],
+  'checkout_step': 2        // Custom parameter for tracking the checkout step
+});
+
+window.dataLayer.push({
+  'event': 'add_payment_info',
+  'currency': 'USD',        // Required parameter: Currency code
+  'value': 50.00,           // Recommended: Total value of the cart
+  'payment_type': 'Credit Card', // Optional but useful: Payment method used
+  'items': [{
+      'item_name': 'Liposomal Curcumin',
+      'item_id': '43010795012287',
+      'price': 25.00,
+      'quantity': 2
+  }],
+  'checkout_step': 3        // Custom parameter for tracking the checkout step
+});
+
+window.dataLayer.push({
+  'event': 'purchase',
+  'transaction_id': 'T12345', // Required: Unique transaction ID
+  'affiliation': 'Online Store', // Optional: Store or affiliation
+  'value': 50.00,           // Required: Total value of the transaction
+  'currency': 'USD',        // Required: Currency code
+  'items': [{
+      'item_name': 'Liposomal Curcumin',
+      'item_id': '43010795012287',
+      'price': 25.00,
+      'quantity': 2
+  }]
+});
+
+Required Parameters Breakdown:
+event: The GA4 event name (e.g., begin_checkout, add_shipping_info, etc.).
+currency: The currency of the transaction (e.g., 'USD').
+value: The total monetary value of the event (this is recommended for most ecommerce events).
+items: An array of items involved in the transaction. Each item object should contain at least:
+item_name: The product name.
+item_id: The product ID (use Shopify product IDs or SKUs).
+price: The price of the item.
+quantity: The number of units purchased.
+Optional but Useful Parameters:
+transaction_id: A unique identifier for the purchase (required for the purchase event).
+coupon: If any coupon or discount code was applied.
+affiliation: The name of the store or platform (e.g., "Online Store").
+shipping_tier: The shipping method chosen (e.g., "Standard").
+
+Steps to Implement in GTM:
+Set Up Variables for Dynamic Data:
+
+Use Data Layer Variables in GTM to pull values like transaction_id, value, currency, and items from the dataLayer.
+For example, create a variable for transaction_id by referencing the data layer key transaction_id.
+Create GA4 Event Tags in GTM:
+
+Set up tags for events like begin_checkout, add_shipping_info, add_payment_info, and purchase.
+Map the required parameters to their respective data layer variables (e.g., currency, items, value).
+Test in GTM Preview Mode:
+
+Ensure that the correct values are being pushed into the dataLayer, and that GA4 tags are firing as expected.
+Check that all required parameters are being sent in the event payload by inspecting the Network tab in Developer Tools or using Google Tag Assistant.
+Conclusion:
+Including these required parameters ensures that your GA4 ecommerce tracking is compliant with best practices, and it enables more detailed reporting in GA4. With these param
+
+<<<<<<< Local Changes
+
+file://evas-MacBook-Air.local/Users/dane
+
+### Other tracking scripts
+
+<!-- begin Convert Experiences code--><script type="text/javascript" src="//cdn-4.convertexperiments.com/v1/js/10042922-10043947.js"></script><!-- end Convert Experiences code -->
+<!-- Begin: Northbeam pixel --><script async type="text/javascript" src="//j.northbeam.io/ota-sp/503eddc8-337a-4d67-a249-e7c9ed3157f8.js"></script><!-- End: Northbeam pixel -->
+<!-- begin PROOF PIXEL--><script src="https://cdn.useproof.com/proof.js?acc=4qbGJ3dUtTWo5ysK10kCBT1UwfA3" async></script><!-- end PROOF PIXEL-->
+
+
+>>>>>>> External Changes
+checkout_started|checkout_contact_info_submitted|checkout_address_info_submitted|checkout_shipping_info_submitted|payment_info_submitted|checkout_completed|page_viewed
+
+^(select_promotion|view_promotion|begin_checkout|add_to_wishlist|view_cart|remove_from_cart|add_to_cart|view_item|select_item|view_item_list|purchase|add_payment_info|add_shipping_info)$
   
   return eventModel.ecomm_totalvalue;
 }
